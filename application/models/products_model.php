@@ -33,10 +33,18 @@ class Products_model extends CI_Model
 
 	public function getOrders(){
 
-		$this->db->select('*');    
+		$this->db->select('orders.id');
+		$this->db->select('orders.oq');
+		$this->db->select('orders.os');
+		$this->db->select('orders.ocd');
+		$this->db->select('products.pimg');
+		$this->db->select('products.pn');
+		$this->db->select('products.psp As psp');
+		$this->db->select('customers.cn');
 		$this->db->from('orders');
-		$this->db->join('products', 'orders.pid = products.id');
-		$this->db->join('customers', 'orders.cid = customers.id');
+		$this->db->join('products', 'products.id = orders.pid', 'inner');
+		$this->db->join('customers', 'customers.id = orders.cid', 'inner');
+		
 		$res = $this->db->get();
 		return $res->result();
 

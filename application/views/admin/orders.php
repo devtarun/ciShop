@@ -30,10 +30,10 @@
                                         <img alt="Image placeholder" src="<?php echo base_url().$order->pimg ?>" class="product-img" alt="product img">
                                     </td>
                                     <td><?php echo $order->pn ?></td>
-                                    <td>Rs. <?php echo $order->op ?></td>
+                                    <td>Rs. <?php echo $order->psp ?></td>
                                     <td><?php echo $order->cn ?></td>
                                     <td><?php echo $order->oq ?></td>
-                                    <td><?php echo date("d M Y", strtotime($order->od)); ?></td>
+                                    <td><?php echo date("d M Y", strtotime($order->ocd)); ?></td>
                                     <td>
                                         <span class="badge-dot">
                                         <i class="bg-danger"></i> <?php echo ucfirst($order->os) ?>

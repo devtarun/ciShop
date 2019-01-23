@@ -41,10 +41,12 @@
                     <div class="media align-items-center collapsed">
                         <div class="avatar"><img class="mr-3 side-user-img" src="<?php echo base_url(); ?>assets/admin/images/avatars/avatar-4.png" alt="user avatar"></div>
                         <div class="media-body">
-                            <h6 class="side-user-name">Tarun</h6>
+                            <h6 class="side-user-name"><?php echo $ar ?></h6>
                         </div>
                     </div>
                 </div>
+                <?php if ($ar == 'Administrator') {
+                ?>
                 <ul class="sidebar-menu do-nicescrol">
                     <li class="sidebar-header">MAIN NAVIGATION</li>
                     <li><a href="<?php echo base_url('admin') ?>" class="waves-effect"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
@@ -52,6 +54,16 @@
                     <li><a href="<?php echo base_url('admin/addproducts') ?>" class="waves-effect"><i class="fa fa-plus"></i><span>Add Products</span></a></li>
                     <li><a href="<?php echo base_url('admin/manageorders') ?>" class="waves-effect"><i class="fa fa-list"></i><span>Manage Orders</span></a></li>
                 </ul>
+                <?php
+                } else { 
+                ?>
+                <ul class="sidebar-menu do-nicescrol">
+                    <li class="sidebar-header">MAIN NAVIGATION</li>
+                    <li><a href="<?php echo base_url('admin/manageorders') ?>" class="waves-effect"><i class="fa fa-list"></i><span>Manage Orders</span></a></li>
+                </ul>
+                <?php 
+                } ?>
+
             </div>
             <!--End sidebar-wrapper-->
             <!--Start topbar header-->
