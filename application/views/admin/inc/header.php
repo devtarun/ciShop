@@ -53,6 +53,7 @@
                     <li><a href="<?php echo base_url('admin/getproducts') ?>" class="waves-effect"><i class="fa fa-shopping-cart"></i><span>All Products</span></a></li>
                     <li><a href="<?php echo base_url('admin/addproducts') ?>" class="waves-effect"><i class="fa fa-plus"></i><span>Add Products</span></a></li>
                     <li><a href="<?php echo base_url('admin/manageorders') ?>" class="waves-effect"><i class="fa fa-list"></i><span>Manage Orders</span></a></li>
+                    <li><a href="<?php echo base_url('admin/categories') ?>" class="waves-effect"><i class="fa fa-eye"></i> Categories</a></li>
                 </ul>
                 <?php
                 } else { 

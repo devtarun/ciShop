@@ -205,4 +205,9 @@ class Admin extends CI_Controller
 		redirect('admin/getproducts','refresh');
 	}
 
+	public function categories(){
+		$this->load->view('admin/categories');
+	}
+
+
 }
