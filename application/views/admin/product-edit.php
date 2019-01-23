@@ -20,6 +20,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <div class="form-group mb-3">
+                                    <input type="hidden" name="pid" value="<?php echo $prod_detail->id ?>">
                                     <label>Product Name:</label>
                                     <?php echo form_input(array(
                                         'name'  => 'pn',
@@ -94,6 +95,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group mb-3">
                                     <input type="hidden" name="cid">
+                                    <input type="hidden" name="pimge" value="<?php echo $prod_detail->pimg ?>">
                                     <label>Product Image:</label>
                                     <?php echo form_upload(array(
                                         'name' => 'pimg',

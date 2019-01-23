@@ -21,8 +21,14 @@ class Products_model extends CI_Model
 	}
 
 	public function updateProduct($pid, $data){
-		$this->db->where('id', $id);
-		$this->db->update('products', $data);
+		$this->db->where('id', $pid);
+		// return $this->db->get_compiled_update('products', $data);
+		if ($this->db->update('products', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	public function getOrders(){

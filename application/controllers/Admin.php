@@ -128,7 +128,7 @@ class Admin extends CI_Controller
 	private function do_upload() {
 		$type = explode('.', $_FILES['pimg']['name']);
 		$type = $type[count($type)-1];
-		$url = "uploads/" . rand(10,20).'.'.$type;
+		$url = "uploads/" . rand(10000,99999).'.'.$type;
 		if (in_array($type, array("jpg", "jpeg", "gif", "png"))) {
 			if (is_uploaded_file($_FILES['pimg']['tmp_name'])) {
 				if (move_uploaded_file($_FILES['pimg']['tmp_name'], $url)) {
@@ -161,21 +161,30 @@ class Admin extends CI_Controller
 	}
 
 	public function updateProd() {
-		
-		$url = $this->do_upload();
-
-		
 		$pid = $this->input->post('pid');
 
-		$data = array(
-			'pn' => $this->input->post('pn'),
-			'psd' => $this->input->post('psd'),
-			'pld' => $this->input->post('pld'),
-			'prp' => $this->input->post('prp'),
-			'psp' => $this->input->post('psp'),
-			'pcat' => $this->input->post('pcat'),
-			'pimg' => $url
-		);
+		if ($_FILES['pimg']['name'] == "") {
+			$data = array(
+				'pn' => $this->input->post('pn'),
+				'psd' => $this->input->post('psd'),
+				'pld' => $this->input->post('pld'),
+				'prp' => $this->input->post('prp'),
+				'psp' => $this->input->post('psp'),
+				'pcat' => $this->input->post('pcat'),
+				'pimg' => $this->input->post('pimge')
+			);
+		} else {
+			$url = $this->do_upload();
+			$data = array(
+				'pn' => $this->input->post('pn'),
+				'psd' => $this->input->post('psd'),
+				'pld' => $this->input->post('pld'),
+				'prp' => $this->input->post('prp'),
+				'psp' => $this->input->post('psp'),
+				'pcat' => $this->input->post('pcat'),
+				'pimg' => $url
+			);
+		}
 
 		$this->form_validation->set_rules('pn', 'required');
 		$this->form_validation->set_rules('psd', 'required');
@@ -187,8 +196,9 @@ class Admin extends CI_Controller
 
 		if ($this->form_validation->run() === FALSE){
 
-	        $this->pm->updateProduct($pid, $data);
-	        redirect('admin/getproducts');
+	        if ($this->pm->updateProduct($pid, $data)) {
+	        	redirect('admin/getproducts');
+	        }
 
 	    } else {
 

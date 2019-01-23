@@ -25,7 +25,7 @@
                                     <?php echo form_input(array(
                                         'name'  => 'pn',
                                         'class' => 'form-control',
-                                        'value' => $pn ? $pn : ""
+                                        'value' => set_value('pn')
                                     )); ?>
                                 </div>
                             </div>
