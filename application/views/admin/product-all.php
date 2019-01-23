@@ -31,7 +31,7 @@
                                     <td><?php echo $product->pn ?></td>
                                     <td><?php echo $product->prp ?></td>
                                     <td><?php echo $product->psp ?></td>
-                                    <td><?php echo $product->pcat ?></td>
+                                    <td><?php echo $product->cn ?></td>
                                     <td><?php echo $product->pcd ?></td>
                                     <td>
                                       <a href="<?php echo base_url('admin/editproduct/').$product->id; ?>" 

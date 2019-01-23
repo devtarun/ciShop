@@ -10,7 +10,12 @@ class Products_model extends CI_Model
 	}
 
 	public function getAllProducts(){
-		$res = $this->db->get('products');
+		$this->db->select('products.*');
+		$this->db->select('categories.cn');
+		$this->db->from('products');
+		$this->db->join('categories', 'products.pcat = categories.id', 'inner');
+		
+		$res = $this->db->get();
 		return $res->result();
 	}
 
