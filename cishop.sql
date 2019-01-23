@@ -43,8 +43,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `an`, `ae`, `ap`, `ar`, `apwd`, `acd`) VALUES
-(1, 'Tarun', 'admin@cishop.com', '8340490384', 'Administrator', '7815696ecbf1c96e6894b779456d330e', '2019-01-22 13:56:10'),
-(2, 'Mukesh', 'editor@cishop.com', '1234567890', 'Editor', '7815696ecbf1c96e6894b779456d330e', '2019-01-22 13:57:11');
+(1, 'Tarun', 'admin@cishop.com', '8340490384', 'Administrator', '21232f297a57a5a743894a0e4a801fc3', '2019-01-22 13:56:10'),
+(2, 'Mukesh', 'editor@cishop.com', '1234567890', 'Editor', '5aee9dbd2a188839105073571bee1b1f', '2019-01-22 13:57:11');
 
 -- --------------------------------------------------------
 
