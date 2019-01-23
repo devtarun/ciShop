@@ -196,8 +196,7 @@ class Admin extends CI_Controller
 
 	    	$this->pm->updateProduct($id, $data);
            	redirect('admin/getproducts');       		
-       }
-       
+       }  
 	}
 
 	public function deleteProd($pid) {
@@ -206,7 +205,22 @@ class Admin extends CI_Controller
 	}
 
 	public function categories(){
-		$this->load->view('admin/categories');
+
+		// $id = $this->uri->segment(3);
+		        
+  //       if (empty($id)){
+  //           show_404();exit;
+  //       } else {
+  //       	echo 1;exit;
+  //       }
+		
+		$categories = $this->pm->getCat();
+		$this->load->view('admin/categories', ['categories' => $categories]);
+		$this->load->view('admin/inc/footer');
+	}
+
+	public function dbCat(){
+
 	}
 
 

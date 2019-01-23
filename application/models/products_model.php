@@ -153,4 +153,28 @@ class Products_model extends CI_Model
 		return $res->result();
 	}
 
+	public function getCat(){
+		$res = $this->db->get('categories');
+		return $res->result();
+	}
+	
+	public function set_category($id = 0){
+        $this->load->helper('url');
+ 
+        $slug = url_title($this->input->post('title'), 'dash', TRUE);
+ 
+        $data = array(
+            'title' => $this->input->post('title'),
+            'slug' => $slug,
+            'text' => $this->input->post('text')
+        );
+        
+        if ($id == 0) {
+            return $this->db->insert('news', $data);
+        } else {
+            $this->db->where('id', $id);
+            return $this->db->update('news', $data);
+        }
+    }
+
 }

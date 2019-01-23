@@ -7,7 +7,6 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('home_model', 'Home_model');
 		$this->load->model('products_model', 'Products_model');
 
 		if(isset($this->session->userdata['token'])){
@@ -18,7 +17,7 @@ class Home extends CI_Controller {
 			$orderForAcc = "";
 		}
 
-		$categories = $this->Home_model->getCat();
+		$categories = $this->Products_model->getCat();
 		$this->load->view('inc/header', [
 			'categories' => $categories,
 			'orderForAcc' 	=> $orderForAcc

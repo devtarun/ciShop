@@ -5,11 +5,6 @@
  */
 class Home_model extends CI_Model
 {
-	public function getCat(){
-		$res = $this->db->get('categories');
-		return $res->result();
-	}
-
 	public function signupData($data){
 		$this->db->insert('customers', $data);
 		return $this->db->insert_id();
