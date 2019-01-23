@@ -13,6 +13,7 @@
         </div>
         <div class="card-body">
             <!-- <form autocomplete="off" action="#" method="POST" enctype="multipart/form-data"> -->
+            <?php echo validation_errors('<span class="error">', '</span>'); ?>
             <?php echo form_open_multipart('admin/addproduct'); ?>
 
                 <div class="row">
@@ -57,7 +58,7 @@
                                     <?php echo form_input(array(
                                         'name'  => 'prp',
                                         'class' => 'form-control',
-                                        'value' => set_value('pn')
+                                        'value' => set_value('prp')
                                     )); ?>
                                 </div>
                             </div>
@@ -98,7 +99,8 @@
                                     <label>Product Image:</label>
                                     <?php echo form_upload(array(
                                         'name' => 'pimg',
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
+                                        'value'     => set_value('pimg')
                                     )); ?>
                                 </div>
                             </div>

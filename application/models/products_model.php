@@ -27,12 +27,7 @@ class Products_model extends CI_Model
 
 	public function updateProduct($pid, $data){
 		$this->db->where('id', $pid);
-		// return $this->db->get_compiled_update('products', $data);
-		if ($this->db->update('products', $data)) {
-			return true;
-		} else {
-			return false;
-		}
+		return $this->db->update('products', $data);
 
 	}
 
@@ -122,6 +117,11 @@ class Products_model extends CI_Model
 		} else {
 			return false;
 		}
+	}
+
+	public function deleteProd($pid){
+		$this->db->where('id', $pid);
+		$this->db->delete('products') ? true : false;
 	}
 
 	public function removeOrder($id){

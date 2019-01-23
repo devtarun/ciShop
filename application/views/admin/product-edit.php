@@ -13,7 +13,8 @@
         </div>
         <div class="card-body">
             <!-- <form autocomplete="off" action="#" method="POST" enctype="multipart/form-data"> -->
-            <?php echo form_open_multipart('admin/updateProd'); ?>
+            <?php echo validation_errors('<span class="error">', '</span>'); ?>
+            <?php echo form_open_multipart('admin/editproduct/'.$prod_detail->id); ?>
                 <div class="row">
                     <div class="col-lg-8">
                         <h5 class="text-sh m-t-0">Basic Information</h5>

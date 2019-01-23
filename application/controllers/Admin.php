@@ -74,9 +74,6 @@ class Admin extends CI_Controller
 	public function getproducts(){
 
 		$products = $this->pm->getAllProducts();
-
-
-		$this->load->view('admin/inc/header');
 		$this->load->view('admin/product-all', [
 			'products' => $products
 		]);
@@ -91,36 +88,38 @@ class Admin extends CI_Controller
 
 	public function addproduct(){
 
-		$url = $this->do_upload();
-
+		$pn = $this->input->post('pn');
+		$psd = $this->input->post('psd');
+		$pld = $this->input->post('pld');
+		$prp = $this->input->post('prp');
+		$psp = $this->input->post('psp');
+		$pcat = $this->input->post('pcat');
 		
-		$data = array(
-			'pn' => $this->input->post('pn'),
-			'psd' => $this->input->post('psd'),
-			'pld' => $this->input->post('pld'),
-			'prp' => $this->input->post('prp'),
-			'psp' => $this->input->post('psp'),
-			'pcat' => $this->input->post('pcat'),
-			'pimg' => $url
-		);
-
-		$this->form_validation->set_rules('pn', 'required');
-		$this->form_validation->set_rules('psd', 'required');
-		$this->form_validation->set_rules('pld', 'required');
-		$this->form_validation->set_rules('prp', 'required');
-		$this->form_validation->set_rules('psp', 'required');
-		$this->form_validation->set_rules('pcat', 'required');
-		$this->form_validation->set_rules('pimg', 'required');
+		$this->form_validation->set_rules('pn', 'Product Name', 'required');
+		$this->form_validation->set_rules('psd', 'Product Short Description', 'required');
+		$this->form_validation->set_rules('pld', 'Product Long Description', 'required');
+		$this->form_validation->set_rules('prp', 'Product Regular Price', 'required|numeric|integer');
+		$this->form_validation->set_rules('psp', 'Product Sale Price', 'required|numeric|integer');
+		$this->form_validation->set_rules('pcat', 'Product Category', 'required');
 
 		if ($this->form_validation->run() === FALSE){
-
-            $this->pm->addProduct($data);
-            redirect('admin/getproducts');
- 
+			$this->load->view('admin/product-add');
         } else {
+			$url = $this->do_upload();
 
-            echo 'error';
+			
+			$data = array(
+				'pn' => $this->input->post('pn'),
+				'psd' => $this->input->post('psd'),
+				'pld' => $this->input->post('pld'),
+				'prp' => $this->input->post('prp'),
+				'psp' => $this->input->post('psp'),
+				'pcat' => $this->input->post('pcat'),
+				'pimg' => $url
+			);
 
+	        $this->pm->addProduct($data);
+	        redirect('admin/getproducts');
         }
 
 	}
@@ -155,60 +154,55 @@ class Admin extends CI_Controller
         
        $data['prod_detail'] = $this->pm->getProductById($id);
 
-       // print_r($data);
-       $this->load->view('admin/product-edit', $data);
-       $this->load->view('admin/inc/footer');
+       $this->form_validation->set_rules('pn', 'Product Name', 'required');
+       $this->form_validation->set_rules('psd', 'Product Short Description', 'required');
+       $this->form_validation->set_rules('pld', 'Product Long Description', 'required');
+       $this->form_validation->set_rules('prp', 'Product Regular Price', 'required|numeric|integer');
+       $this->form_validation->set_rules('psp', 'Product Sale Price', 'required|numeric|integer');
+       $this->form_validation->set_rules('pcat', 'Product Category', 'required');
+
+       if (!empty($prod_detail->pimg)) {
+       		$this->form_validation->set_rules('pimg', 'Product Image', 'required');
+       }
+
+       if ($this->form_validation->run() === FALSE) {
+
+           $this->load->view('admin/product-edit', $data);
+           $this->load->view('admin/inc/footer');
+
+       } else {
+       		if ($_FILES['pimg']['name'] == "") {
+	    		$data = array(
+	    			'pn' => $this->input->post('pn'),
+	    			'psd' => $this->input->post('psd'),
+	    			'pld' => $this->input->post('pld'),
+	    			'prp' => $this->input->post('prp'),
+	    			'psp' => $this->input->post('psp'),
+	    			'pcat' => $this->input->post('pcat'),
+	    			'pimg' => $this->input->post('pimge')
+	    		);
+	    	} else {
+	    		$url = $this->do_upload();
+	    		$data = array(
+	    			'pn' => $this->input->post('pn'),
+	    			'psd' => $this->input->post('psd'),
+	    			'pld' => $this->input->post('pld'),
+	    			'prp' => $this->input->post('prp'),
+	    			'psp' => $this->input->post('psp'),
+	    			'pcat' => $this->input->post('pcat'),
+	    			'pimg' => $url
+	    		);
+	    	}
+
+	    	$this->pm->updateProduct($id, $data);
+           	redirect('admin/getproducts');       		
+       }
+       
 	}
 
-	public function updateProd() {
-		$pid = $this->input->post('pid');
-
-		if ($_FILES['pimg']['name'] == "") {
-			$data = array(
-				'pn' => $this->input->post('pn'),
-				'psd' => $this->input->post('psd'),
-				'pld' => $this->input->post('pld'),
-				'prp' => $this->input->post('prp'),
-				'psp' => $this->input->post('psp'),
-				'pcat' => $this->input->post('pcat'),
-				'pimg' => $this->input->post('pimge')
-			);
-		} else {
-			$url = $this->do_upload();
-			$data = array(
-				'pn' => $this->input->post('pn'),
-				'psd' => $this->input->post('psd'),
-				'pld' => $this->input->post('pld'),
-				'prp' => $this->input->post('prp'),
-				'psp' => $this->input->post('psp'),
-				'pcat' => $this->input->post('pcat'),
-				'pimg' => $url
-			);
-		}
-
-		$this->form_validation->set_rules('pn', 'required');
-		$this->form_validation->set_rules('psd', 'required');
-		$this->form_validation->set_rules('pld', 'required');
-		$this->form_validation->set_rules('prp', 'required');
-		$this->form_validation->set_rules('psp', 'required');
-		$this->form_validation->set_rules('pcat', 'required');
-		$this->form_validation->set_rules('pimg', 'required');
-
-		if ($this->form_validation->run() === FALSE){
-
-	        if ($this->pm->updateProduct($pid, $data)) {
-	        	redirect('admin/getproducts');
-	        }
-
-	    } else {
-
-	        echo 'error';
-
-	    }
+	public function deleteProd($pid) {
+		$this->pm->deleteProd($pid);
+		redirect('admin/getproducts','refresh');
 	}
-
-	
-
-
 
 }
