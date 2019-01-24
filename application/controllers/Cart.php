@@ -18,7 +18,7 @@ class Cart extends CI_Controller {
 			$orderForAcc = "";
 		}
 
-		$categories = $this->Home_model->getCat();
+		$categories = $this->pm->getCat();
 		$this->load->view('inc/header', [
 			'categories' => $categories,
 			'orderForAcc' 	=> $orderForAcc

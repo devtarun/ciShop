@@ -18,7 +18,7 @@ class Products extends CI_Controller
 			$orderForAcc = "";
 		}
 
-		$categories = $this->Home_model->getCat();
+		$categories = $this->pm->getCat();
 		$this->load->view('inc/header', [
 			'categories' => $categories,
 			'orderForAcc' 	=> $orderForAcc
@@ -84,7 +84,11 @@ class Products extends CI_Controller
 
 	   	// print_r($productDetail);
 
-	   	$data['cid'] = $this->session->userdata['cid'];
+	   	if (isset($this->session->userdata['token'])) {
+	   		$data['cid'] = $this->session->userdata['cid'];
+	   	} else {
+	   		$data['cid'] = 0;
+	   	}
 	   	$data['id']   = $productDetail->id;
 	   	$data['pn']   = $productDetail->pn;
 	   	$data['psd']  = $productDetail->psd;
@@ -121,6 +125,7 @@ class Products extends CI_Controller
 		$st = $this->input->post('st');
 		$result = $this->pm->searchProd($st);
 		$this->load->view('search', ['prod_list' => $result]);
+		$this->load->view('inc/footer');
 	}
 
 }
