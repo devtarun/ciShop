@@ -18,10 +18,12 @@ class Admin extends CI_Controller
 		if (isset($this->session->userdata['auth_token'])) {
 			$adminData = $this->session->userdata['adminData'];
 
-			$data['an'] = $adminData->an;
-			$data['ae'] = $adminData->ae;
-			$data['ap'] = $adminData->ap;
-			$data['ar'] = $adminData->ar;
+			// print_r($adminData);die();
+
+			$data['an'] = $adminData['0']->an;
+			$data['ae'] = $adminData['0']->ae;
+			$data['ap'] = $adminData['0']->ap;
+			$data['ar'] = $adminData['0']->ar;
 
 			$this->load->view('admin/inc/header', $data);
 		}
@@ -57,15 +59,18 @@ class Admin extends CI_Controller
 			$this->login();
 		} else {
 
-			$adminData = $this->am->loginDB($ae, $ap);
-
-			$sessionDate = array(
-				'auth_token' => md5($ae.$ap),
-				'adminData' => $adminData
-			);
-			
-			$this->session->set_userdata( $sessionDate );
-			redirect('admin');
+			if ($this->am->loginDB($ae, $ap)) {
+				$adminData = $this->am->adminData($ae);
+				$sessionDate = array(
+					'auth_token' => md5($ae.$ap),
+					'adminData' => $adminData
+				);
+				$this->session->set_userdata( $sessionDate );
+				redirect('admin');
+			} else {
+				$this->session->set_flashdata('loginerror', 'Invalid Username/Password');
+				$this->login();
+			}
 		}
 	}
 
@@ -86,20 +91,12 @@ class Admin extends CI_Controller
 	}
 
 	public function addproduct(){
-
-		$pn = $this->input->post('pn');
-		$psd = $this->input->post('psd');
-		$pld = $this->input->post('pld');
-		$prp = $this->input->post('prp');
-		$psp = $this->input->post('psp');
-		$pcat = $this->input->post('pcat');
 		
 		$this->form_validation->set_rules('pn', 'Product Name', 'required');
 		$this->form_validation->set_rules('psd', 'Product Short Description', 'required');
 		$this->form_validation->set_rules('pld', 'Product Long Description', 'required');
 		$this->form_validation->set_rules('prp', 'Product Regular Price', 'required|numeric|integer');
 		$this->form_validation->set_rules('psp', 'Product Sale Price', 'required|numeric|integer');
-		$this->form_validation->set_rules('pcat', 'Product Category', 'required');
 
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('admin/product-add');
@@ -114,6 +111,7 @@ class Admin extends CI_Controller
 				'prp' => $this->input->post('prp'),
 				'psp' => $this->input->post('psp'),
 				'pcat' => $this->input->post('pcat'),
+				'isf' => $this->input->post('isf'),
 				'pimg' => $url
 			);
 
@@ -178,6 +176,7 @@ class Admin extends CI_Controller
 	    			'prp' => $this->input->post('prp'),
 	    			'psp' => $this->input->post('psp'),
 	    			'pcat' => $this->input->post('pcat'),
+	    			'isf' => $this->input->post('isf'),
 	    			'pimg' => $this->input->post('pimge')
 	    		);
 	    	} else {
@@ -189,6 +188,7 @@ class Admin extends CI_Controller
 	    			'prp' => $this->input->post('prp'),
 	    			'psp' => $this->input->post('psp'),
 	    			'pcat' => $this->input->post('pcat'),
+	    			'isf' => $this->input->post('isf'),
 	    			'pimg' => $url
 	    		);
 	    	}

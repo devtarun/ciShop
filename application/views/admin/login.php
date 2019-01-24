@@ -29,6 +29,7 @@
                         </div>
                         <div class="card-title text-uppercase text-center py-2">Sign In</div>
                         <?php echo validation_errors('<span class="error">', '</span>'); ?>
+                        <?php $this->session->flashdata('loginerror'); ?>
                         <?php echo form_open('admin/login_auth'); ?>
                             <div class="form-group">
                                 <div class="position-relative has-icon-left">

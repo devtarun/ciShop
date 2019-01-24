@@ -83,15 +83,32 @@
                                             '3' => 'Kids',
                                             '4' => 'Accessories'
                                         ],
-                                        'class'     => 'form-control',
-                                        'value'     => set_value('pcat')
+                                        'selected' => $prod_detail->pcat,
+                                        'class'     => 'form-control'
                                     )); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h5 class="text-sh m-t-0">Image</h5>
+                        <h5 class="text-sh m-t-0">Other Information</h5>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="form-group mb-3">
+                                    <input type="hidden" name="cid">
+                                    <label>Is Featured? :</label>
+                                    <?php echo form_dropdown(array(
+                                        'name'      => 'isf',
+                                        'options'   => [
+                                            '0' => 'No',
+                                            '1' => 'Yes'
+                                        ],
+                                        'class'     => 'form-control',
+                                        'selected' => $prod_detail->isf,
+                                    )); ?>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <div class="form-group mb-3">

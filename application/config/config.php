@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8080/ciShop/';
+$config['base_url'] = 'http://localhost:8080/ciShop/'; //DEVELOPMENT
+// $config['base_url'] = 'http://www.saksham-ueft.com/'; //PRODUCTION
 
 /*
 |--------------------------------------------------------------------------
