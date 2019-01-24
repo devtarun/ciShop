@@ -119,6 +119,7 @@ class Home extends CI_Controller {
 		$this->form_validation->set_rules('ce', 'Email', 'required|valid_email|is_unique[customers.ce]');
 		$this->form_validation->set_rules('cpwd', 'Password', 'required');
 		$this->form_validation->set_rules('ccpwd', 'Password Confirmation', 'required|matches[cpwd]');
+		$this->form_validation->set_message('is_unique', 'This Email Id is already registered. Please login to continue.');
 
 		if ($this->form_validation->run() == FALSE) {
             $this->register();
