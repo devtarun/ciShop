@@ -25,7 +25,6 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <?php echo validation_errors('<span class="error">', '</span>'); ?>
-                        <?php echo $this->session->flashdata('signupsuccess'); ?>
                     </div>
 
                     <!-- Register Content Start -->

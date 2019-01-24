@@ -121,15 +121,13 @@ class Home extends CI_Controller {
 		$this->form_validation->set_rules('ccpwd', 'Password Confirmation', 'required|matches[cpwd]');
 
 		if ($this->form_validation->run() == FALSE) {
-           
-            $this->load->view('account');
-            $this->load->view('inc/footer');
+            $this->register();
         } else {
             
         	$data = [
         		'cn' => $cn,
         		'ce' => $ce,
-        		'cpwd' => $cpwd
+        		'cpwd' => md5($cpwd)
         	];
             
         	$last_id = $this->Home_model->signupData($data);

@@ -26,6 +26,7 @@
                     <div class="col-lg-12 text-center">
                         <?php echo validation_errors('<span class="error">', '</span>'); ?>
                         <?php echo $this->session->flashdata('error'); ?>
+                        <?php echo $this->session->flashdata('signupsuccess'); ?>
                     </div>
                     <!-- Login Content Start -->
                     <div class="col-lg-6 offset-lg-3">
