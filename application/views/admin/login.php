@@ -28,7 +28,7 @@
                             <img src="<?php echo base_url(); ?>assets/admin/images/logo-icon.png"/>
                         </div>
                         <div class="card-title text-uppercase text-center py-2">Sign In</div>
-                        <p><?php echo $this->session->flashdata('adminerror'); ?></p>
+                        <?php echo validation_errors('<span class="error">', '</span>'); ?>
                         <?php echo form_open('admin/login_auth'); ?>
                             <div class="form-group">
                                 <div class="position-relative has-icon-left">

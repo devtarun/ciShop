@@ -7,7 +7,7 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('products_model', 'Products_model');
+		$this->load->model('Products_model', 'Products_model');
 
 		if(isset($this->session->userdata['token'])){
 			$cid = $this->session->userdata['cid'];

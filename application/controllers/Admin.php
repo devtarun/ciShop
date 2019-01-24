@@ -11,9 +11,9 @@ class Admin extends CI_Controller
 
 		$config['upload_path'] = './uploads/';
 
-		$this->load->model('products_model', 'pm');
+		$this->load->model('Products_model', 'pm');
 
-		$this->load->model('admin_model', 'am');
+		$this->load->model('Admin_model', 'am');
 
 		if (isset($this->session->userdata['auth_token'])) {
 			$adminData = $this->session->userdata['adminData'];
@@ -50,11 +50,10 @@ class Admin extends CI_Controller
 
 	public function login_auth(){
 		$ae = $this->input->post('ae');
-		$ap = $this->input->post('ap');
+		$ap = md5($this->input->post('ap'));
 		$this->form_validation->set_rules('ae', 'Username', 'required');
 		$this->form_validation->set_rules('ap', 'Password', 'required');
 		if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('adminerror', 'Invalid Email/Password');
 			$this->login();
 		} else {
 

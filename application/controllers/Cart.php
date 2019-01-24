@@ -7,8 +7,8 @@ class Cart extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('products_model', 'pm');
-		$this->load->model('home_model', 'Home_model');
+		$this->load->model('Products_model', 'pm');
+		$this->load->model('Home_model', 'Home_model');
 
 		if(isset($this->session->userdata['token'])){
 			$cid = $this->session->userdata['cid'];
